@@ -686,6 +686,13 @@ void loop()
   manage_inactivity();
   checkHitEndstops();
   lcd_update();
+	//static uint32_t time = 0;
+	//if(millis() - time > 1000)
+	//{
+	//	time = millis();
+	//	MYSERIAL.print("Heartbeat\n");
+	//	//watchdog_reset();
+	//}
 }
 
 void get_command()
@@ -792,6 +799,9 @@ void get_command()
       if(serial_char == ';') comment_mode = true;
       if(!comment_mode) cmdbuffer[bufindw][serial_count++] = serial_char;
     }
+		//SERIAL_ECHO("Got '");
+		//SERIAL_ECHO(serial_char);
+		//SERIAL_ECHOLN("'");
   }
   #ifdef SDSUPPORT
   if(!card.sdprinting || serial_count!=0){
